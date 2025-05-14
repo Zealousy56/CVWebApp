@@ -1,0 +1,27 @@
+﻿@model TaxCalculator
+
+@{
+    ViewBag.Title = "Tax Calculator";
+}
+
+<h2>Tax Calculator</h2>
+
+@using (Html.BeginForm("Calculate", "TaxCalculator", FormMethod.Post))
+{
+    <div>
+        <label for="Income">Income:</label>
+        @Html.TextBoxFor(m => m.Income, new { @class = "form-control" })
+    </div>
+    <div>
+        <label for="TaxCode">Tax Code:</label>
+        @Html.TextBoxFor(m => m.TaxCode, new { @class = "form-control" })
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Calculate</button>
+    </div>
+}
+
+@if (Model.TaxAmount > 0)
+{
+    <h3>Tax Amount: @Model.TaxAmount.ToString("C")</h3>
+}
