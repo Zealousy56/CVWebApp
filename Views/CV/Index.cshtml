@@ -1,0 +1,73 @@
+﻿@model Cv
+
+<div class="text-center">
+
+    <h1>@Model.Name</h1>
+    <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Phone:</strong> @Model.Phone</p>
+    <p><strong>Personal Statement:</strong> @Model.Statement</p>
+
+    <h2>Skills</h2>
+    <ul>
+        @foreach (var skill in Model.Skills)
+        {
+            <li>@skill</li>
+        }
+    </ul>
+
+    <h2>Interests</h2>
+    <ul>
+        @foreach (var interest in Model.Interests)
+        {
+            <li>@interest</li>
+        }
+    </ul>
+
+    <h2>Work Experience</h2>
+    @foreach (var experience in Model.WorkExperience)
+    {
+        <h3>@experience.JobTitle - @experience.Company</h3>
+        <p><strong>Duration:</strong> @experience.Duration</p>
+        <p>@experience.Description</p>
+    }
+
+    <h2>Projects</h2>
+    @foreach (var project in Model.Projects)
+    {
+        <h3>@project.ProjectTitle</h3>
+        <p><strong>Duration:</strong> @project.Duration</p>
+        <p>@project.Description</p>
+    }
+
+    <h2>Education</h2>
+    @foreach (var education in Model.Education)
+    {
+        <h3>@education.SchoolName</h3>
+        <p><strong>@education.SchoolName</strong></p>
+        <p><strong>Duration:</strong> @education.Duration</p>
+
+        <ul>
+            @foreach (var subject in education.Subject)
+            {
+                <li>@subject</li>
+            }
+        </ul>
+
+        <ul>
+            @foreach (var grade in education.Subject)
+            {
+                <li>@grade</li>
+            }
+        </ul>
+    }
+
+    <h2>Certificates</h2>
+    @foreach (var certificate in Model.Certificates)
+    {
+        <h3>@certificate.Title</h3>
+        <p><strong>@certificate.IssuingOrg</strong></p>
+        <p><strong>Issued in:</strong> @certificate.IssueDate</p>
+    }
+
+
+</div>
