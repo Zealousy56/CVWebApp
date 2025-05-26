@@ -10,14 +10,24 @@ namespace CVWebApp.Controllers
             return View(new TaxCalculator());
         }
 
-        [HttpPost]
         public ActionResult Calculate(TaxCalculator model)
         {
             if (ModelState.IsValid)
             {
                 model.TaxAmount = CalculateTax(model.Income, model.TaxCode);
             }
-            return View("Index", model);
+            return View("Index",model);
+        }
+
+        [HttpPost]
+        [Route("api/taxcalculator")]
+        public ActionResult CalculateAPI(TaxCalculator model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.TaxAmount = CalculateTax(model.Income, model.TaxCode);
+            }
+            return Ok(model);
         }
 
         private decimal CalculateTax(decimal income, string taxCode)

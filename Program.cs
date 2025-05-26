@@ -1,7 +1,14 @@
+using CVWebApp.Data;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("GalleryDatabase") ?? throw new InvalidOperationException("Invalid connection string");
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSqlServer<GalleryDbContext>(connectionString, opts => opts.EnableRetryOnFailure());
 
 var app = builder.Build();
 
@@ -16,13 +23,13 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthorization();  
 
 app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Cv}/{action=Index}/{id?}")
+    pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 
